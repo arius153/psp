@@ -45,5 +45,11 @@
         </div>
         <button type="submit">OK</button>
     </form:form>
+    <c:if test="${errorMessage != null}">
+        <div>
+            ${errorMessage}
+        </div>
+    </c:if>
 </div>
+
 <%@ include file="common/footer.jspf" %>

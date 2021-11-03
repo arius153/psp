@@ -29,11 +29,15 @@ public class VartotojasController {
 
     @PostMapping("/add-vartotojas")
     public String add(ModelMap model, @ModelAttribute("vartotojas") Vartotojas vartotojas, BindingResult result) {
-        if (result.hasErrors()) {
+        vartotojasService.validateVartotojas(vartotojas);
+        String errorMessage = vartotojasService.validateVartotojas(vartotojas);
+        if (errorMessage != null) {
+            model.addAttribute("errorMessage", errorMessage);
             return "add-vartotojas";
         }
         vartotojasService.add(vartotojas);
         return "redirect:/vartotojas";
+
     }
 
     @GetMapping("/update-vartotojas/{id}")
@@ -44,7 +48,10 @@ public class VartotojasController {
 
     @PostMapping("/update-vartotojas/{id}")
     public String update(ModelMap model, @ModelAttribute("vartotojas") Vartotojas vartotojas, BindingResult result) {
-        if (result.hasErrors()) {
+        vartotojasService.validateVartotojas(vartotojas);
+        String errorMessage = vartotojasService.validateVartotojas(vartotojas);
+        if (errorMessage != null) {
+            model.addAttribute("errorMessage", errorMessage);
             return "add-vartotojas";
         }
         vartotojasService.update(vartotojas);
